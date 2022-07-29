@@ -22,7 +22,7 @@ class ImageClassification(tlx.nn.Module):
             raise ValueError(f"tlxzoo don`t support {backbone}")
 
         self.train_weights = self.trainable_weights
-        self.li_regularizer = tlx.losses.li_regularizer(0.00001)
+        # self.li_regularizer = tlx.losses.li_regularizer(0.00001)
 
         self.l2_weights = []
         if l2_weights:
@@ -35,8 +35,8 @@ class ImageClassification(tlx.nn.Module):
     def loss_fn(self, output, target, name="", **kwargs):
         loss = tlx.losses.softmax_cross_entropy_with_logits(output, target)
 
-        for w in self.l2_weights:
-            loss += self.li_regularizer(w)
+        # for w in self.l2_weights:
+        #     loss += self.li_regularizer(w)
         return loss
 
     def forward(self, inputs):
